@@ -1,0 +1,121 @@
+batch_id,fabric_type,source,quantity_kg,color,condition,waste_category,recyclability_score,contamination_level,damage_level
+TWB-001,Cotton,Mumbai Textile Mill,120.5,White,Recyclable,Recyclable,0.85,Low,None
+TWB-002,Polyester,Delhi Garment Factory,250.0,Blue,Contaminated,Hazardous Textile Waste,0.20,High,Severe
+TWB-003,Wool,Ludhiana Woolens,45.5,Black,Reusable,Reusable,0.95,None,None
+TWB-004,Silk,Surat Silk House,12.0,Red,Damaged,Repairable,0.60,Low,Minor
+TWB-005,Denim,Ahmedabad Fabrics,320.5,Blue,Recyclable,Upcyclable,0.90,Low,Minor
+TWB-006,Linen,Chennai Cotton Works,85.0,White,Fair,Recyclable,0.75,Low,Moderate
+TWB-007,Nylon,Tirupur Knits,150.0,Green,Contaminated,Compostable,0.30,High,Moderate
+TWB-008,Rayon,Bangalore Weaving Unit,200.0,Multi,Good,Reusable,0.80,None,Minor
+TWB-009,Acrylic,Kolkata Jute Works,75.5,Brown,Damaged,Repairable,0.50,Medium,Moderate
+TWB-010,Mixed Fabrics,Coimbatore Textiles,400.0,Grey,Contaminated,Hazardous Textile Waste,0.15,High,Severe
+TWB-011,Cotton,Mumbai Textile Mill,110.0,Yellow,Recyclable,Recyclable,0.82,Low,None
+TWB-012,Polyester,Delhi Garment Factory,260.0,Pink,Contaminated,Hazardous Textile Waste,0.22,High,Severe
+TWB-013,Wool,Ludhiana Woolens,50.0,White,Reusable,Reusable,0.94,None,None
+TWB-014,Silk,Surat Silk House,15.0,Blue,Damaged,Repairable,0.65,Low,Minor
+TWB-015,Denim,Ahmedabad Fabrics,310.0,Black,Recyclable,Upcyclable,0.88,Low,Minor
+TWB-016,Linen,Chennai Cotton Works,90.0,Brown,Fair,Recyclable,0.78,Low,Moderate
+TWB-017,Nylon,Tirupur Knits,160.0,Red,Contaminated,Compostable,0.35,High,Moderate
+TWB-018,Rayon,Bangalore Weaving Unit,210.0,Green,Good,Reusable,0.85,None,Minor
+TWB-019,Acrylic,Kolkata Jute Works,80.0,Grey,Damaged,Repairable,0.55,Medium,Moderate
+TWB-020,Mixed Fabrics,Coimbatore Textiles,410.0,White,Contaminated,Hazardous Textile Waste,0.18,High,Severe
+TWB-021,Cotton,Mumbai Textile Mill,100.0,White,Recyclable,Recyclable,0.85,Low,None
+TWB-022,Polyester,Delhi Garment Factory,240.0,Blue,Contaminated,Hazardous Textile Waste,0.20,High,Severe
+TWB-023,Wool,Ludhiana Woolens,40.0,Black,Reusable,Reusable,0.95,None,None
+TWB-024,Silk,Surat Silk House,10.0,Red,Damaged,Repairable,0.60,Low,Minor
+TWB-025,Denim,Ahmedabad Fabrics,300.0,Blue,Recyclable,Upcyclable,0.90,Low,Minor
+TWB-026,Linen,Chennai Cotton Works,80.0,White,Fair,Recyclable,0.75,Low,Moderate
+TWB-027,Nylon,Tirupur Knits,140.0,Green,Contaminated,Compostable,0.30,High,Moderate
+TWB-028,Rayon,Bangalore Weaving Unit,190.0,Multi,Good,Reusable,0.80,None,Minor
+TWB-029,Acrylic,Kolkata Jute Works,70.0,Brown,Damaged,Repairable,0.50,Medium,Moderate
+TWB-030,Mixed Fabrics,Coimbatore Textiles,390.0,Grey,Contaminated,Hazardous Textile Waste,0.15,High,Severe
+TWB-031,Cotton,Mumbai Textile Mill,130.0,Yellow,Recyclable,Recyclable,0.82,Low,None
+TWB-032,Polyester,Delhi Garment Factory,270.0,Pink,Contaminated,Hazardous Textile Waste,0.22,High,Severe
+TWB-033,Wool,Ludhiana Woolens,55.0,White,Reusable,Reusable,0.94,None,None
+TWB-034,Silk,Surat Silk House,18.0,Blue,Damaged,Repairable,0.65,Low,Minor
+TWB-035,Denim,Ahmedabad Fabrics,330.0,Black,Recyclable,Upcyclable,0.88,Low,Minor
+TWB-036,Linen,Chennai Cotton Works,95.0,Brown,Fair,Recyclable,0.78,Low,Moderate
+TWB-037,Nylon,Tirupur Knits,170.0,Red,Contaminated,Compostable,0.35,High,Moderate
+TWB-038,Rayon,Bangalore Weaving Unit,220.0,Green,Good,Reusable,0.85,None,Minor
+TWB-039,Acrylic,Kolkata Jute Works,85.0,Grey,Damaged,Repairable,0.55,Medium,Moderate
+TWB-040,Mixed Fabrics,Coimbatore Textiles,420.0,White,Contaminated,Hazardous Textile Waste,0.18,High,Severe
+TWB-041,Cotton,Mumbai Textile Mill,125.0,White,Recyclable,Recyclable,0.85,Low,None
+TWB-042,Polyester,Delhi Garment Factory,255.0,Blue,Contaminated,Hazardous Textile Waste,0.20,High,Severe
+TWB-043,Wool,Ludhiana Woolens,48.0,Black,Reusable,Reusable,0.95,None,None
+TWB-044,Silk,Surat Silk House,13.0,Red,Damaged,Repairable,0.60,Low,Minor
+TWB-045,Denim,Ahmedabad Fabrics,325.0,Blue,Recyclable,Upcyclable,0.90,Low,Minor
+TWB-046,Linen,Chennai Cotton Works,88.0,White,Fair,Recyclable,0.75,Low,Moderate
+TWB-047,Nylon,Tirupur Knits,155.0,Green,Contaminated,Compostable,0.30,High,Moderate
+TWB-048,Rayon,Bangalore Weaving Unit,205.0,Multi,Good,Reusable,0.80,None,Minor
+TWB-049,Acrylic,Kolkata Jute Works,78.0,Brown,Damaged,Repairable,0.50,Medium,Moderate
+TWB-050,Mixed Fabrics,Coimbatore Textiles,405.0,Grey,Contaminated,Hazardous Textile Waste,0.15,High,Severe
+TWB-051,Cotton,Mumbai Textile Mill,115.0,Yellow,Recyclable,Recyclable,0.82,Low,None
+TWB-052,Polyester,Delhi Garment Factory,265.0,Pink,Contaminated,Hazardous Textile Waste,0.22,High,Severe
+TWB-053,Wool,Ludhiana Woolens,52.0,White,Reusable,Reusable,0.94,None,None
+TWB-054,Silk,Surat Silk House,16.0,Blue,Damaged,Repairable,0.65,Low,Minor
+TWB-055,Denim,Ahmedabad Fabrics,315.0,Black,Recyclable,Upcyclable,0.88,Low,Minor
+TWB-056,Linen,Chennai Cotton Works,92.0,Brown,Fair,Recyclable,0.78,Low,Moderate
+TWB-057,Nylon,Tirupur Knits,165.0,Red,Contaminated,Compostable,0.35,High,Moderate
+TWB-058,Rayon,Bangalore Weaving Unit,215.0,Green,Good,Reusable,0.85,None,Minor
+TWB-059,Acrylic,Kolkata Jute Works,82.0,Grey,Damaged,Repairable,0.55,Medium,Moderate
+TWB-060,Mixed Fabrics,Coimbatore Textiles,415.0,White,Contaminated,Hazardous Textile Waste,0.18,High,Severe
+TWB-061,Cotton,Mumbai Textile Mill,105.0,White,Recyclable,Recyclable,0.85,Low,None
+TWB-062,Polyester,Delhi Garment Factory,245.0,Blue,Contaminated,Hazardous Textile Waste,0.20,High,Severe
+TWB-063,Wool,Ludhiana Woolens,42.0,Black,Reusable,Reusable,0.95,None,None
+TWB-064,Silk,Surat Silk House,11.0,Red,Damaged,Repairable,0.60,Low,Minor
+TWB-065,Denim,Ahmedabad Fabrics,305.0,Blue,Recyclable,Upcyclable,0.90,Low,Minor
+TWB-066,Linen,Chennai Cotton Works,82.0,White,Fair,Recyclable,0.75,Low,Moderate
+TWB-067,Nylon,Tirupur Knits,145.0,Green,Contaminated,Compostable,0.30,High,Moderate
+TWB-068,Rayon,Bangalore Weaving Unit,195.0,Multi,Good,Reusable,0.80,None,Minor
+TWB-069,Acrylic,Kolkata Jute Works,72.0,Brown,Damaged,Repairable,0.50,Medium,Moderate
+TWB-070,Mixed Fabrics,Coimbatore Textiles,395.0,Grey,Contaminated,Hazardous Textile Waste,0.15,High,Severe
+TWB-071,Cotton,Mumbai Textile Mill,135.0,Yellow,Recyclable,Recyclable,0.82,Low,None
+TWB-072,Polyester,Delhi Garment Factory,275.0,Pink,Contaminated,Hazardous Textile Waste,0.22,High,Severe
+TWB-073,Wool,Ludhiana Woolens,58.0,White,Reusable,Reusable,0.94,None,None
+TWB-074,Silk,Surat Silk House,19.0,Blue,Damaged,Repairable,0.65,Low,Minor
+TWB-075,Denim,Ahmedabad Fabrics,335.0,Black,Recyclable,Upcyclable,0.88,Low,Minor
+TWB-076,Linen,Chennai Cotton Works,98.0,Brown,Fair,Recyclable,0.78,Low,Moderate
+TWB-077,Nylon,Tirupur Knits,175.0,Red,Contaminated,Compostable,0.35,High,Moderate
+TWB-078,Rayon,Bangalore Weaving Unit,225.0,Green,Good,Reusable,0.85,None,Minor
+TWB-079,Acrylic,Kolkata Jute Works,88.0,Grey,Damaged,Repairable,0.55,Medium,Moderate
+TWB-080,Mixed Fabrics,Coimbatore Textiles,425.0,White,Contaminated,Hazardous Textile Waste,0.18,High,Severe
+TWB-081,Cotton,Mumbai Textile Mill,128.0,White,Recyclable,Recyclable,0.85,Low,None
+TWB-082,Polyester,Delhi Garment Factory,258.0,Blue,Contaminated,Hazardous Textile Waste,0.20,High,Severe
+TWB-083,Wool,Ludhiana Woolens,47.0,Black,Reusable,Reusable,0.95,None,None
+TWB-084,Silk,Surat Silk House,14.0,Red,Damaged,Repairable,0.60,Low,Minor
+TWB-085,Denim,Ahmedabad Fabrics,328.0,Blue,Recyclable,Upcyclable,0.90,Low,Minor
+TWB-086,Linen,Chennai Cotton Works,87.0,White,Fair,Recyclable,0.75,Low,Moderate
+TWB-087,Nylon,Tirupur Knits,158.0,Green,Contaminated,Compostable,0.30,High,Moderate
+TWB-088,Rayon,Bangalore Weaving Unit,208.0,Multi,Good,Reusable,0.80,None,Minor
+TWB-089,Acrylic,Kolkata Jute Works,77.0,Brown,Damaged,Repairable,0.50,Medium,Moderate
+TWB-090,Mixed Fabrics,Coimbatore Textiles,408.0,Grey,Contaminated,Hazardous Textile Waste,0.15,High,Severe
+TWB-091,Cotton,Mumbai Textile Mill,118.0,Yellow,Recyclable,Recyclable,0.82,Low,None
+TWB-092,Polyester,Delhi Garment Factory,268.0,Pink,Contaminated,Hazardous Textile Waste,0.22,High,Severe
+TWB-093,Wool,Ludhiana Woolens,53.0,White,Reusable,Reusable,0.94,None,None
+TWB-094,Silk,Surat Silk House,17.0,Blue,Damaged,Repairable,0.65,Low,Minor
+TWB-095,Denim,Ahmedabad Fabrics,318.0,Black,Recyclable,Upcyclable,0.88,Low,Minor
+TWB-096,Linen,Chennai Cotton Works,93.0,Brown,Fair,Recyclable,0.78,Low,Moderate
+TWB-097,Nylon,Tirupur Knits,168.0,Red,Contaminated,Compostable,0.35,High,Moderate
+TWB-098,Rayon,Bangalore Weaving Unit,218.0,Green,Good,Reusable,0.85,None,Minor
+TWB-099,Acrylic,Kolkata Jute Works,83.0,Grey,Damaged,Repairable,0.55,Medium,Moderate
+TWB-100,Mixed Fabrics,Coimbatore Textiles,418.0,White,Contaminated,Hazardous Textile Waste,0.18,High,Severe
+TWB-101,Cotton,Mumbai Textile Mill,108.0,White,Recyclable,Recyclable,0.85,Low,None
+TWB-102,Polyester,Delhi Garment Factory,248.0,Blue,Contaminated,Hazardous Textile Waste,0.20,High,Severe
+TWB-103,Wool,Ludhiana Woolens,43.0,Black,Reusable,Reusable,0.95,None,None
+TWB-104,Silk,Surat Silk House,11.5,Red,Damaged,Repairable,0.60,Low,Minor
+TWB-105,Denim,Ahmedabad Fabrics,308.0,Blue,Recyclable,Upcyclable,0.90,Low,Minor
+TWB-106,Linen,Chennai Cotton Works,83.0,White,Fair,Recyclable,0.75,Low,Moderate
+TWB-107,Nylon,Tirupur Knits,148.0,Green,Contaminated,Compostable,0.30,High,Moderate
+TWB-108,Rayon,Bangalore Weaving Unit,198.0,Multi,Good,Reusable,0.80,None,Minor
+TWB-109,Acrylic,Kolkata Jute Works,73.0,Brown,Damaged,Repairable,0.50,Medium,Moderate
+TWB-110,Mixed Fabrics,Coimbatore Textiles,398.0,Grey,Contaminated,Hazardous Textile Waste,0.15,High,Severe
+TWB-111,Cotton,Mumbai Textile Mill,138.0,Yellow,Recyclable,Recyclable,0.82,Low,None
+TWB-112,Polyester,Delhi Garment Factory,278.0,Pink,Contaminated,Hazardous Textile Waste,0.22,High,Severe
+TWB-113,Wool,Ludhiana Woolens,57.0,White,Reusable,Reusable,0.94,None,None
+TWB-114,Silk,Surat Silk House,19.5,Blue,Damaged,Repairable,0.65,Low,Minor
+TWB-115,Denim,Ahmedabad Fabrics,338.0,Black,Recyclable,Upcyclable,0.88,Low,Minor
+TWB-116,Linen,Chennai Cotton Works,97.0,Brown,Fair,Recyclable,0.78,Low,Moderate
+TWB-117,Nylon,Tirupur Knits,178.0,Red,Contaminated,Compostable,0.35,High,Moderate
+TWB-118,Rayon,Bangalore Weaving Unit,228.0,Green,Good,Reusable,0.85,None,Minor
+TWB-119,Acrylic,Kolkata Jute Works,87.0,Grey,Damaged,Repairable,0.55,Medium,Moderate
+TWB-120,Mixed Fabrics,Coimbatore Textiles,428.0,White,Contaminated,Hazardous Textile Waste,0.18,High,Severe

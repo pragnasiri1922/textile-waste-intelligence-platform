@@ -1,0 +1,7 @@
+category_id,category_name,description,processing_method,environmental_benefit,priority_level
+1,Recyclable,Can be broken down into raw materials,Mechanical/Chemical Recycling,Resource Conservation,High
+2,Reusable,Can be used again without major processing,Sorting/Cleaning,Waste Reduction,Highest
+3,Repairable,Can be fixed for further use,Mending/Restoration,Lifespan Extension,High
+4,Upcyclable,Can be transformed into higher value products,Creative Repurposing,Value Addition,Medium
+5,Compostable,Biodegradable materials,Composting,Soil Enrichment,Medium
+6,Hazardous Textile Waste,Contaminated or toxic materials,Safe Disposal/Incineration,Pollution Prevention,Low

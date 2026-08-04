@@ -1,0 +1,11 @@
+material_name,category,fiber_type,recyclability,common_blends,environmental_impact,decomposition_years
+Cotton,Natural,Cellulose,High,Polyester/Spandex,High Water Usage,1-5
+Polyester,Synthetic,Polymer,Medium,Cotton/Elastane,Microplastic Pollution,20-200
+Wool,Natural,Protein,High,Acrylic/Nylon,Moderate,1-5
+Silk,Natural,Protein,Medium,Cotton/Viscose,High Energy Usage,1-3
+Linen,Natural,Cellulose,High,Cotton/Rayon,Low,1-2
+Denim,Natural/Synthetic,Cellulose/Polymer,Medium,Spandex/Polyester,High Water/Chemicals,1-5
+Nylon,Synthetic,Polymer,Low,Spandex/Polyester,High Energy Usage,30-40
+Rayon,Semi-Synthetic,Cellulose,Medium,Cotton/Polyester,Chemical Pollution,1-5
+Acrylic,Synthetic,Polymer,Low,Wool/Polyester,High Energy Usage,20-200
+Mixed Fabrics,Blend,Various,Low,Various,Complex,Varies
