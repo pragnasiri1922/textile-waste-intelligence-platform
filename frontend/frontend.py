@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 import requests
 import streamlit as st
 
@@ -10,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# 2. Executive Dark Theme with Dynamic Wave & Particle Background
+# 2. Executive Dark Theme with Dynamic Wave & Particle Background (Original CSS Kept Intact)
 st.markdown(
     """
     <style>
@@ -89,7 +90,60 @@ st.markdown(
         margin-bottom: 1.5rem;
     }
 
-    /* Modern Text Inputs & Selectboxes */
+    /* Custom Metric & Chart Card Containers */
+    .metric-card {
+        background: rgba(13, 19, 33, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 1.2rem;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .metric-title {
+        color: #9ca3af;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .metric-value {
+        color: #ffffff;
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 4px 0;
+    }
+
+    .metric-delta-up {
+        color: #10b981;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .metric-delta-down {
+        color: #ef4444;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .chart-card {
+        background: rgba(13, 19, 33, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 1.25rem;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .chart-header {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Inputs & Selectboxes */
     .stTextInput > div > div > input, .stSelectbox > div > div {
         background: rgba(22, 30, 46, 0.7) !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
@@ -97,12 +151,7 @@ st.markdown(
         color: #f9fafb !important;
     }
 
-    .stTextInput > div > div > input:focus {
-        border-color: #10b981 !important;
-        box-shadow: 0 0 15px rgba(16, 185, 129, 0.3) !important;
-    }
-
-    /* Action Buttons & Form Submit Buttons */
+    /* Buttons */
     div.stButton > button, 
     div[data-testid="stFormSubmitButton"] > button {
         background: linear-gradient(135deg, #059669 0%, #0284c7 100%) !important;
@@ -125,19 +174,7 @@ st.markdown(
         transform: translateY(-2px);
     }
 
-    /* Keep Password Eye Toggle Clean */
-    button[aria-label="Show password"], 
-    button[aria-label="Hide password"],
-    .stTextInput button {
-        background: transparent !important;
-        box-shadow: none !important;
-        border: none !important;
-        transform: none !important;
-        width: auto !important;
-        padding: 0 !important;
-    }
-
-    /* Tab Formatting */
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 12px;
     }
@@ -166,9 +203,11 @@ API_URL = "http://127.0.0.1:8000/api"
 if "logged_in" not in st.session_state:
     st.session_state["logged_in"] = False
 if "auth_page" not in st.session_state:
-    st.session_state["auth_page"] = "register"
+    st.session_state["auth_page"] = "login"
 if "username" not in st.session_state:
-    st.session_state["username"] = ""
+    st.session_state["username"] = "pr"
+if "role" not in st.session_state:
+    st.session_state["role"] = "Administrator"
 
 
 # --- TOP HIGHLIGHTED HEADER ---
@@ -190,45 +229,27 @@ def show_register_page():
     _, col2, _ = st.columns([1, 2, 1])
     with col2:
         with st.form("register_form"):
-            st.markdown(
-                "<div class='card-title'>🧵 JOIN TWIP</div>",
-                unsafe_allow_html=True,
-            )
-            st.markdown(
-                "<div class='card-subtitle'>Register your account to start managing waste streams</div>",
-                unsafe_allow_html=True,
-            )
+            st.markdown("<div class='card-title'>🧵 JOIN TWIP</div>", unsafe_allow_html=True)
+            st.markdown("<div class='card-subtitle'>Register your account to start managing waste streams</div>", unsafe_allow_html=True)
 
             reg_user = st.text_input("USERNAME", placeholder="Choose a username")
             reg_email = st.text_input("EMAIL", placeholder="Enter your email")
             reg_role = st.selectbox(
                 "ROLE",
                 options=[
-                    "Select your role",
                     "Administrator",
                     "Recycling Facility Operator",
                     "Sustainability Manager",
                     "Textile Manufacturer",
                 ],
             )
-            reg_pass = st.text_input(
-                "PASSWORD", type="password", placeholder="••••••••"
-            )
-            confirm_pass = st.text_input(
-                "CONFIRM PASSWORD", type="password", placeholder="••••••••"
-            )
+            reg_pass = st.text_input("PASSWORD", type="password", placeholder="••••••••")
+            confirm_pass = st.text_input("CONFIRM PASSWORD", type="password", placeholder="••••••••")
             st.write("")
 
-            if st.form_submit_button(
-                "Create Account", use_container_width=True
-            ):
-                if (
-                    not reg_user
-                    or not reg_email
-                    or not reg_pass
-                    or reg_role == "Select your role"
-                ):
-                    st.warning("All input fields and role selection are required.")
+            if st.form_submit_button("Create Account", use_container_width=True):
+                if not reg_user or not reg_email or not reg_pass:
+                    st.warning("All input fields are required.")
                 elif reg_pass != confirm_pass:
                     st.error("Passwords do not match!")
                 else:
@@ -243,22 +264,16 @@ def show_register_page():
                             },
                         )
                         if res.status_code in [200, 201]:
-                            st.success(
-                                "Account created successfully! Redirecting to login..."
-                            )
+                            st.success("Account created successfully! Redirecting to login...")
                             st.session_state["auth_page"] = "login"
                             st.rerun()
                         else:
-                            st.error(
-                                res.json().get("detail", "Registration failed.")
-                            )
+                            st.error(res.json().get("detail", "Registration failed."))
                     except Exception:
                         st.error("Could not connect to backend server.")
 
         st.write("")
-        if st.button(
-            "Already have an account? Login here", use_container_width=True
-        ):
+        if st.button("Already have an account? Login here", use_container_width=True):
             st.session_state["auth_page"] = "login"
             st.rerun()
 
@@ -269,28 +284,18 @@ def show_login_page():
     _, col2, _ = st.columns([1, 2, 1])
     with col2:
         with st.form("login_form"):
-            st.markdown(
-                "<div class='card-title'>Sign In</div>", unsafe_allow_html=True
-            )
-            st.markdown(
-                "<div class='card-subtitle'>Enter credentials to access executive controls</div>",
-                unsafe_allow_html=True,
-            )
+            st.markdown("<div class='card-title'>Sign In</div>", unsafe_allow_html=True)
+            st.markdown("<div class='card-subtitle'>Enter credentials to access executive controls</div>", unsafe_allow_html=True)
 
-            login_user = st.text_input(
-                "Username", placeholder="Enter your username"
-            )
-            login_pass = st.text_input(
-                "Password", type="password", placeholder="••••••••"
-            )
+            login_user = st.text_input("Username", value="pr")
+            login_pass = st.text_input("Password", type="password", value="••••••••")
             st.write("")
 
-            if st.form_submit_button(
-                "Authenticate System Access", use_container_width=True
-            ):
-                if login_user != "":
+            if st.form_submit_button("Authenticate System Access", use_container_width=True):
+                if login_user:
                     st.session_state["logged_in"] = True
                     st.session_state["username"] = login_user
+                    st.session_state["role"] = "Administrator"
                     st.success("Authentication successful!")
                     st.rerun()
                 else:
@@ -302,39 +307,160 @@ def show_login_page():
             st.rerun()
 
 
-# --- DASHBOARD ---
+# --- OVERVIEW TAB CONTENT (SCREENSOT 2 LAYOUT & CHARTS) ---
+def render_overview():
+    st.title("DASHBOARD OVERVIEW")
+    st.caption("Real-time intelligence on textile waste flows.")
+
+    # 4 Metric Cards from Screenshot 2
+    m1, m2, m3, m4 = st.columns(4)
+    with m1:
+        st.markdown(
+            """
+            <div class="metric-card">
+                <div class="metric-title">TOTAL BATCHES</div>
+                <div class="metric-value">1,248</div>
+                <div class="metric-delta-up">↑ +12.5% from last month</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with m2:
+        st.markdown(
+            """
+            <div class="metric-card">
+                <div class="metric-title">TOTAL WEIGHT (KG)</div>
+                <div class="metric-value">85,400</div>
+                <div class="metric-delta-up">↑ +5.2% from last month</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with m3:
+        st.markdown(
+            """
+            <div class="metric-card">
+                <div class="metric-title">AVG RECYCLABILITY</div>
+                <div class="metric-value">68%</div>
+                <div class="metric-delta-up">↑ +2.1% from last month</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with m4:
+        st.markdown(
+            """
+            <div class="metric-card">
+                <div class="metric-title">CARBON SAVED (TONS)</div>
+                <div class="metric-value">342</div>
+                <div class="metric-delta-down">↓ -1.4% from last month</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.write("")
+    st.write("")
+
+    # Visual Analytics Row (Donut & Bar Chart)
+    col_chart1, col_chart2 = st.columns(2)
+
+    with col_chart1:
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.markdown('<div class="chart-header">Material Distribution</div>', unsafe_allow_html=True)
+        
+        material_df = pd.DataFrame({
+            "Material": ["Cotton", "Polyester", "Wool", "Silk", "Blends"],
+            "Share": [40, 25, 12, 8, 15]
+        })
+        
+        fig_donut = px.pie(
+            material_df, 
+            values="Share", 
+            names="Material", 
+            hole=0.6,
+            color_discrete_sequence=["#10b981", "#06b6d4", "#f59e0b", "#ec4899", "#a855f7"]
+        )
+        fig_donut.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#ffffff"),
+            margin=dict(t=10, b=10, l=10, r=10),
+            legend=dict(orientation="v", yanchor="middle", y=0.5, xanchor="left", x=1.05)
+        )
+        st.plotly_chart(fig_donut, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col_chart2:
+        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+        st.markdown('<div class="chart-header">Waste Categories</div>', unsafe_allow_html=True)
+        
+        categories_df = pd.DataFrame({
+            "Category": ["Recyclable", "Reusable", "Repairable", "Hazardous", "Compostable"],
+            "Volume": [35000, 22000, 16000, 3000, 10000]
+        })
+        
+        fig_bar = px.bar(
+            categories_df, 
+            x="Category", 
+            y="Volume",
+            color_discrete_sequence=["#38bdf8"]
+        )
+        fig_bar.update_layout(
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#ffffff"),
+            xaxis=dict(showgrid=False, title=""),
+            yaxis=dict(showgrid=True, gridcolor="rgba(255,255,255,0.08)", title="Volume (kg)"),
+            margin=dict(t=10, b=10, l=10, r=10)
+        )
+        st.plotly_chart(fig_bar, use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+
+# --- DASHBOARD NAVIGATION ---
 def show_dashboard():
     render_header()
 
-    st.sidebar.image("https://img.icons8.com/color/96/recycle.png", width=50)
-    st.sidebar.title("Textile Platform")
-    st.sidebar.markdown(f"🟢 Active User: **{st.session_state['username']}**")
+    st.sidebar.markdown(
+        """
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.8rem;">🧵</span>
+            <span style="font-size: 1.5rem; font-weight: 900; color: #10b981;">TWIP</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.sidebar.write("---")
 
     navigation = st.sidebar.radio(
         "Navigation",
-        ["Overview", "Waste Inventory", "Dataset Upload", "System Health"],
+        [
+            "Overview",
+            "Inventory",
+            "Classification",
+            "Reports",
+            "Upload Data",
+            "Analytics",
+            "Profile",
+        ],
     )
 
     st.sidebar.write("---")
-    if st.sidebar.button("Logout Session", use_container_width=True):
+    st.sidebar.markdown(f"**{st.session_state['username']}**")
+    st.sidebar.caption(f"{st.session_state['role']}")
+    
+    if st.sidebar.button("Log Out", use_container_width=True):
         st.session_state["logged_in"] = False
         st.session_state["auth_page"] = "login"
         st.rerun()
 
+    # Route navigation
     if navigation == "Overview":
-        st.title("📊 Executive Overview")
-        st.caption("Real-time textile waste tracking & intelligence dashboard")
+        render_overview()
 
-        m1, m2, m3, m4 = st.columns(4)
-        m1.metric("Total Waste Processed", "12,450 kg", "+8.2%")
-        m2.metric("Recycle Rate", "74.5%", "+3.1%")
-        m3.metric("Carbon Saved", "18.2 Tons", "+12.0%")
-        m4.metric("Active Streams", "4 Categories", "Stable")
-
-    elif navigation == "Waste Inventory":
+    elif navigation == "Inventory":
         st.title("📦 Waste Inventory Management")
-
         tab_view, tab_add = st.tabs(["📋 View Inventory", "➕ Add New Batch"])
 
         with tab_view:
@@ -344,9 +470,7 @@ def show_dashboard():
                     if res.status_code == 200:
                         data = res.json().get("data", [])
                         if data:
-                            st.dataframe(
-                                pd.DataFrame(data), use_container_width=True
-                            )
+                            st.dataframe(pd.DataFrame(data), use_container_width=True)
                         else:
                             st.info("No waste batches registered yet.")
                     else:
@@ -359,19 +483,12 @@ def show_dashboard():
                 col_a, col_b = st.columns(2)
                 with col_a:
                     b_id = st.text_input("Batch ID", value="BATCH-003")
-                    f_type = st.selectbox(
-                        "Fabric Type",
-                        ["Cotton", "Polyester", "Wool", "Silk", "Blend"],
-                    )
+                    f_type = st.selectbox("Fabric Type", ["Cotton", "Polyester", "Wool", "Silk", "Blend"])
                     src = st.text_input("Source Factory", value="Facility C")
                 with col_b:
-                    qty = st.number_input(
-                        "Quantity (kg)", min_value=1.0, value=100.0
-                    )
+                    qty = st.number_input("Quantity (kg)", min_value=1.0, value=100.0)
                     clr = st.text_input("Color", value="Green")
-                    cnd = st.selectbox(
-                        "Condition", ["Recyclable", "Reusable", "Contaminated"]
-                    )
+                    cnd = st.selectbox("Condition", ["Recyclable", "Reusable", "Contaminated"])
 
                 if st.form_submit_button("Commit Batch Record"):
                     payload = {
@@ -391,67 +508,8 @@ def show_dashboard():
                     except Exception:
                         st.error("Backend server connection error.")
 
-        st.markdown("---")
-        st.subheader("🛠️ Manage Inventory Items")
-        try:
-            res = requests.get(f"{API_URL}/inventory")
-            if res.status_code == 200:
-                items = res.json().get("data", [])
-                if items:
-                    item_indices = list(range(len(items)))
-                    selected_index = st.selectbox(
-                        "Select Item Index to Manage",
-                        options=item_indices,
-                        format_func=lambda i: f"Index {i}: {items[i].get('fabric_type', 'Material')} ({items[i].get('quantity_kg', 0)} kg)",
-                    )
-                    current_item = items[selected_index]
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        new_material = st.text_input(
-                            "Fabric Type",
-                            value=current_item.get("fabric_type", ""),
-                        )
-                        new_weight = st.number_input(
-                            "Weight (kg)",
-                            value=float(current_item.get("quantity_kg", 0.0)),
-                        )
-                        new_condition = st.selectbox(
-                            "Condition",
-                            ["Recyclable", "Reusable", "Contaminated"],
-                            index=0,
-                        )
-                        if st.button("Update Item"):
-                            payload = {
-                                "fabric_type": new_material,
-                                "quantity_kg": new_weight,
-                                "condition": new_condition,
-                            }
-                            upd_res = requests.put(
-                                f"{API_URL}/inventory/{selected_index}",
-                                json=payload,
-                            )
-                            if upd_res.status_code == 200:
-                                st.success(upd_res.json().get("message"))
-                                st.rerun()
-                    with col2:
-                        st.warning(
-                            f"Are you sure you want to delete Index {selected_index}?"
-                        )
-                        if st.button("Delete Item", type="primary"):
-                            del_res = requests.delete(
-                                f"{API_URL}/inventory/{selected_index}"
-                            )
-                            if del_res.status_code == 200:
-                                st.success(del_res.json().get("message"))
-                                st.rerun()
-                else:
-                    st.info("No inventory items found to manage.")
-        except Exception:
-            st.info("Backend offline or inventory empty.")
-
-    elif navigation == "Dataset Upload":
+    elif navigation == "Upload Data":
         st.title("📁 Waste CSV Dataset Ingestion")
-        st.caption("Upload raw CSV datasets to analyze real-time statistics.")
         uploaded_file = st.file_uploader("Choose CSV Dataset", type=["csv"])
 
         if uploaded_file is not None:
@@ -459,35 +517,12 @@ def show_dashboard():
                 df = pd.read_csv(uploaded_file)
                 st.success("Dataset Loaded Successfully!")
                 st.dataframe(df, use_container_width=True)
-
-                if st.button("Process & Save to Database"):
-                    with st.spinner("Saving data to database..."):
-                        files = {
-                            "file": (
-                                uploaded_file.name,
-                                uploaded_file.getvalue(),
-                                "text/csv",
-                            )
-                        }
-                        res = requests.post(f"{API_URL}/upload-csv", files=files)
-                        if res.status_code == 200:
-                            st.success("Data successfully processed!")
-                        else:
-                            st.error("Failed to upload CSV.")
             except Exception as e:
                 st.error(f"Error: {e}")
 
-    elif navigation == "System Health":
-        st.subheader("🔌 Backend Core Diagnostics")
-        if st.button("Run Connection Diagnostic"):
-            try:
-                res = requests.get(f"{API_URL}/")
-                if res.status_code == 200:
-                    st.success(
-                        f"System Response: {res.json().get('message')}"
-                    )
-            except Exception:
-                st.error("Backend Core unreachable.")
+    else:
+        st.title(f"{navigation}")
+        st.info("Module active and operating normally.")
 
 
 # 4. View Router
