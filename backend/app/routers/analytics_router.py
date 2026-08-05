@@ -1,8 +1,10 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func
-import schemas, models
-from database import get_db
+from sqlalchemy.orm import Session
+from typing import List, Dict, Any
+
+from backend.app import schemas, models, auth
+from backend.app.database import get_db
 
 router = APIRouter(prefix="/api/analytics", tags=["Analytics"])
 
@@ -15,17 +17,17 @@ def get_summary(db: Session = Depends(get_db)):
     material_dist = db.query(
         models.WasteBatch.fabric_type, func.sum(models.WasteBatch.quantity_kg)
     ).group_by(models.WasteBatch.fabric_type).all()
-    material_distribution = {m[0]: m[1] for m in material_dist}
+    material_distribution = {m[0]: m[1] for m in material_dist if m[0]}
     
     cat_dist = db.query(
         models.WasteBatch.waste_category, func.count(models.WasteBatch.id)
     ).group_by(models.WasteBatch.waste_category).all()
-    category_distribution = {c[0]: c[1] for c in cat_dist}
+    category_distribution = {c[0]: c[1] for c in cat_dist if c[0]}
     
     cond_dist = db.query(
         models.WasteBatch.condition, func.count(models.WasteBatch.id)
     ).group_by(models.WasteBatch.condition).all()
-    condition_distribution = {c[0]: c[1] for c in cond_dist}
+    condition_distribution = {c[0]: c[1] for c in cond_dist if c[0]}
     
     return schemas.AnalyticsResponse(
         total_batches=total_batches,
@@ -60,7 +62,6 @@ def get_condition_distribution(db: Session = Depends(get_db)):
 @router.get("/environmental-impact")
 def get_environmental_impact(db: Session = Depends(get_db)):
     total_weight = db.query(func.sum(models.WasteBatch.quantity_kg)).scalar() or 0.0
-    # Dummy calculation for environmental impact
     return {
         "carbon_saved_kg": total_weight * 2.5,
         "water_saved_liters": total_weight * 100,

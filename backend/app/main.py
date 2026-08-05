@@ -4,10 +4,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-import models
-from database import engine, Base
-from routers import auth_router, inventory_router, analytics_router, upload_router, classification_router
-
+from backend.app import models
+from backend.app.database import engine, Base
+from backend.app.routers import auth_router, inventory_router, analytics_router, upload_router, classification_router
 # Create all database tables
 Base.metadata.create_all(bind=engine)
 

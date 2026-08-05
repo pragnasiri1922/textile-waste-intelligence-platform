@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
 from sqlalchemy.orm import Session
 import csv
 import io
-import schemas, models, auth
-from database import get_db
 
+from backend.app import schemas, models, auth
+from backend.app.database import get_db
 router = APIRouter(prefix="/api/upload", tags=["Data Upload"])
 
 @router.post("/csv")

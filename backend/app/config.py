@@ -9,4 +9,4 @@ ALGORITHM = 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 # 24 hours
 
 # Absolute path to backend/textile_waste.db
-DATABASE_URL = f"sqlite:///{BASE_DIR / 'textile_waste.db'}" 
+DATABASE_URL = "postgresql://postgres:pragna19@localhost:5432/textile_waste_db"
