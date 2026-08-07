@@ -30,7 +30,7 @@ app.include_router(auth_router.router)
 app.include_router(inventory_router.router)
 app.include_router(analytics_router.router)
 app.include_router(upload_router.router)
-app.include_router(classification_router.router)
+app.include_router(classification_router.router, prefix="/api")
 
 # Resolve frontend directory path relative to project root
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent

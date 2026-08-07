@@ -1,3 +1,4 @@
+import PIL.Image
 import pandas as pd
 import plotly.express as px
 import requests
@@ -519,6 +520,57 @@ def show_dashboard():
                 st.dataframe(df, use_container_width=True)
             except Exception as e:
                 st.error(f"Error: {e}")
+
+    elif navigation == "Classification":
+        st.title("🧵 Fabric Material Classification Engine")
+        st.caption("Upload a textile sample image to perform automated material composition analysis.")
+
+        uploaded_file = st.file_uploader("Upload Fabric Sample Image", type=["jpg", "jpeg", "png"])
+
+        if uploaded_file is not None:
+            image = PIL.Image.open(uploaded_file)
+            st.image(image, caption=f"Sample: {uploaded_file.name}", width=350)
+
+            if st.button("Run Image Analysis & Material Classification"):
+                with st.spinner("Analyzing textile texture, patterns, and composition..."):
+                    files = {"file": (uploaded_file.name, uploaded_file.getvalue(), uploaded_file.type)}
+                    
+                    try:
+                        print("TARGET URL:", f"{API_URL}/classify/material")
+                        res = requests.post("http://127.0.0.1:8000/api/classify/material", files=files)
+                        
+                        if res.status_code == 200:
+                            result = res.json().get("analysis", {})
+                            st.success("Analysis Complete!")
+
+                            col1, col2, col3 = st.columns(3)
+                            with col1:
+                                st.metric(label="Detected Material", value=result.get("material_detected", "N/A"))
+                            with col2:
+                                conf = result.get("confidence", 0)
+                                st.metric(label="Confidence Rating", value=f"{round(conf * 100, 1)}%")
+                            with col3:
+                                qual = result.get("quality_score", 0)
+                                st.metric(label="Quality Score", value=f"{int(qual * 100)} / 100")
+
+                            st.divider()
+
+                            st.subheader("🔍 Material Characteristics")
+                            c_a, c_b, c_c = st.columns(3)
+                            with c_a:
+                                st.write(f"**Texture:** {result.get('texture', 'N/A').title()}")
+                            with c_b:
+                                st.write(f"**Pattern:** {result.get('pattern', 'N/A').title()}")
+                            with c_c:
+                                st.write(f"**Color Detected:** {result.get('color_detected', 'N/A')}")
+
+                            st.write(f"**Defects Identified:** {result.get('defects_detected', 'N/A').title()}")
+
+                        else:
+                            st.error(f"Backend Server Error (Status Code: {res.status_code})")
+
+                    except Exception as e:
+                        st.error(f"Failed to connect to backend server: {e}")
 
     else:
         st.title(f"{navigation}")
